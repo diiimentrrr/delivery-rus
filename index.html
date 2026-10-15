@@ -153,7 +153,7 @@ document.getElementById('checkoutForm').addEventListener('submit',e=>{
  document.getElementById('adminDetails').textContent=document.getElementById('customerName').value+' · '+money(Object.keys(cart).reduce((s,id)=>s+foods.find(f=>f.id==id).price*cart[id],0));
  document.getElementById('adminStatus').value='0';updateStatus();cart={};renderCart();e.target.reset();toast('Тапсырыс демо режимінде қабылданды!');document.getElementById('track').scrollIntoView({behavior:'smooth'});
 });
-function changeStatus(value){if(!orderNo){toast('Алдымен тапсырыс беру керек.');return}statusIndex=Number(value);updateStatus();toast('Тапсырыс мәртебесі жаңартылды')}
+function changeStatus(value){if(!orderNo){toast('Алдымен тапсырысты беру керек.');return}statusIndex=Number(value);updateStatus();toast('Тапсырыс мәртебесі жаңартылды')}
 function updateStatus(){
  const names=['Қабылданды','Дайындалуда','Курьер жолда','Жеткізілді'];
  document.getElementById('statusList').innerHTML=names.map((n,i)=>`<div class="status-step ${i<=statusIndex?'current':''}"><span class="dot"></span>${n}${i===statusIndex?' ✓':''}</div>`).join('');
