@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>дәмді — Онлайн тағам тапсырысы</title>
+<style>
+:root{--orange:#f46b35;--ink:#202124;--muted:#6b7280;--cream:#fff8f2;--line:#eee5de;--green:#21865b}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--ink)}
+header{position:sticky;top:0;background:#ffffffed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:5}
+.nav{max-width:1160px;margin:auto;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:26px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--orange)}
+nav{display:flex;gap:20px;align-items:center}nav a{color:var(--ink);text-decoration:none;font-weight:700;font-size:14px}
+button,.btn{border:0;border-radius:12px;background:var(--orange);color:white;padding:12px 17px;font-weight:800;cursor:pointer;transition:.15s}
+button:hover,.btn:hover{filter:brightness(.94);transform:translateY(-1px)}button.secondary{background:#fff0e8;color:#b94c20}
+.cart-btn{white-space:nowrap}.hero{background:linear-gradient(115deg,#fff1e5,#fffaf5 60%,#ffe2ce);padding:54px 22px 48px}
+.hero-inner{max-width:1160px;margin:auto;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:25px}
+.eyebrow{display:inline-block;background:white;color:#bd4e21;border:1px solid #ffd4bd;border-radius:100px;padding:8px 12px;font-size:12px;font-weight:800}
+h1{font-size:clamp(38px,5vw,62px);line-height:1.02;letter-spacing:-2px;margin:18px 0}
+.hero p{color:#6f625b;line-height:1.7;max-width:520px}
+.hero-art{font-size:clamp(100px,17vw,190px);text-align:center;filter:drop-shadow(0 15px 10px #dcae8b55);transform:rotate(-5deg)}
+.wrap{max-width:1160px;margin:auto;padding:35px 22px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;flex-wrap:wrap}
+h2{font-size:29px;letter-spacing:-.7px;margin:0 0 8px}.sub{color:var(--muted);margin:0}
+.categories{display:flex;gap:9px;flex-wrap:wrap;margin:24px 0}
+.categories button{background:#f6f4f2;color:#4b4541}.categories button.active{background:var(--ink);color:white}
+.search{border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:220px;font-size:14px;outline-color:var(--orange)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.food{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:white;transition:.2s}
+.food:hover{box-shadow:0 12px 28px #35251a12;transform:translateY(-3px)}
+.food-img{height:155px;display:grid;place-items:center;font-size:80px;background:linear-gradient(135deg,#fff2e8,#fffaf5)}
+.food-body{padding:15px}.tag{font-size:11px;font-weight:800;color:#b9562d;background:#fff0e7;padding:6px 8px;border-radius:7px;display:inline-block}
+.food h3{margin:11px 0 7px;font-size:17px}.food p{font-size:13px;color:var(--muted);line-height:1.45;min-height:37px;margin:0 0 15px}
+.food-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{font-weight:900;font-size:17px}.food-bottom button{padding:10px 12px}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:38px}
+.info-card{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:20px}.info-card .emoji{font-size:28px}.info-card h3{margin:10px 0 6px}.info-card p{color:var(--muted);font-size:14px;line-height:1.5;margin:0}
+.order-section{background:#faf8f6;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.order-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:22px}
+.panel h3{margin-top:0}.empty{padding:24px 0;color:var(--muted);text-align:center}
+.cart-line{display:grid;grid-template-columns:1fr auto;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}
+.cart-line small{display:block;color:var(--muted);margin-top:5px}.qty{display:flex;align-items:center;gap:9px;margin-top:8px}.qty button{padding:4px 9px;border-radius:8px;background:#f3eee9;color:#333}
+.line-right{text-align:right;font-weight:800}.remove{background:transparent!important;color:#a33!important;padding:5px!important;font-size:12px}
+.total{display:flex;justify-content:space-between;padding-top:18px;font-size:20px;font-weight:900}
+form{display:grid;gap:12px}label{font-size:13px;font-weight:800}input,textarea,select{width:100%;margin-top:6px;padding:12px;border:1px solid #e3dcd6;border-radius:10px;font:inherit;outline-color:var(--orange)}textarea{resize:vertical;min-height:75px}
+.status-list{display:grid;gap:10px;margin-top:15px}.status-step{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px;color:var(--muted)}.status-step .dot{width:12px;height:12px;border-radius:50%;background:#ddd}.status-step.current{background:#effaf4;border-color:#b8e4ce;color:#176b48;font-weight:800}.status-step.current .dot{background:var(--green)}
+.admin{background:#fff}.admin-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+footer{background:#202124;color:white;padding:28px 22px}.footer-inner{max-width:1160px;margin:auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:#c6c6c6;font-size:13px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#202124;color:white;padding:13px 18px;border-radius:12px;z-index:20;box-shadow:0 5px 25px #0002;display:none}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-inner{grid-template-columns:1fr .55fr}.order-layout{grid-template-columns:1fr}}
+@media(max-width:560px){nav{gap:10px}nav a{display:none}.nav{padding:13px 16px}.hero{padding:36px 16px}.hero-inner{grid-template-columns:1fr}.hero-art{font-size:100px;grid-row:1}.wrap{padding:28px 16px}.grid{gap:10px}.food-img{height:120px;font-size:62px}.food-body{padding:11px}.food h3{font-size:15px}.food p{font-size:12px}.food-bottom{align-items:flex-start;flex-direction:column}.food-bottom button{width:100%}.info{grid-template-columns:1fr}.search{width:100%}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+  <div class="logo">дәмді<span>.</span></div>
+  <nav><a href="#menu">Мәзір</a><a href="#how">Қалай жұмыс істейді?</a><a href="#track">Тапсырыс мәртебесі</a></nav>
+  <button class="cart-btn" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">Себет <span id="cartCount">0</span></button>
+</div></header>
+<section class="hero"><div class="hero-inner">
+  <div><span class="eyebrow">● ЖАҢА ДАЙЫНДАЛҒАН ТАҒАМ</span>
+  <h1>Сүйікті тағамың<br>есігіңе дейін.</h1>
+  <p>Мәзірден таңда, себетке қос және тапсырысыңды бірнеше қадаммен рәсімде. Дәмді тағам — оңай әрі ыңғайлы.</p>
+  <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Мәзірді көру ↘</button>
+  </div><div class="hero-art" aria-label="Бургер суреті">🍔</div>
+</div></section>
+<main>
+<section class="wrap" id="menu">
+  <div class="section-head"><div><h2>Біздің мәзір</h2><p class="sub">Өзіңе ұнайтын тағамды таңда</p></div><input class="search" id="search" placeholder="Тағамды іздеу..." oninput="renderMenu()"></div>
+  <div class="categories" id="categories">
+    <button class="active" data-cat="Барлығы" onclick="setCategory('Барлығы',this)">Барлығы</button>
+    <button data-cat="Фастфуд" onclick="setCategory('Фастфуд',this)">🍔 Фастфуд</button>
+    <button data-cat="Негізгі тағам" onclick="setCategory('Негізгі тағам',this)">🍽️ Негізгі тағам</button>
+    <button data-cat="Сусындар" onclick="setCategory('Сусындар',this)">🥤 Сусындар</button>
+    <button data-cat="Десерттер" onclick="setCategory('Десерттер',this)">🍰 Десерттер</button>
+  </div>
+  <div class="grid" id="foodGrid"></div>
+  <div class="info" id="how">
+    <div class="info-card"><div class="emoji">🛍️</div><h3>1. Таңда</h3><p>Мәзірді қарап, ұнаған тағамдарды себетке қос.</p></div>
+    <div class="info-card"><div class="emoji">💳</div><h3>2. Рәсімде</h3><p>Байланыс мәліметтерін және жеткізу мекенжайын енгіз.</p></div>
+    <div class="info-card"><div class="emoji">🛵</div><h3>3. Қабылда</h3><p>Тапсырыстың мәртебесін төмендегі бөлімнен бақыла.</p></div>
+  </div>
+</section>
+<section class="order-section" id="order"><div class="wrap">
+  <div class="section-head"><div><h2>Тапсырысты рәсімдеу</h2><p class="sub">Мәліметтерді толтырып, тапсырысты жібер</p></div></div>
+  <div class="order-layout" style="margin-top:22px">
+    <div class="panel"><h3>🛒 Сенің себетің</h3><div id="cartItems"><div class="empty">Себет әзірге бос.<br>Мәзірден тағам таңда.</div></div><div class="total"><span>Жалпы сома</span><span id="total">0 ₸</span></div></div>
+    <div class="panel"><h3>📍 Жеткізу деректері</h3>
+      <form id="checkoutForm">
+        <label>Аты-жөнің<input id="customerName" required placeholder="Мысалы, Айдос Нұрланұлы"></label>
+        <label>Телефон нөмірі<input id="phone" type="tel" required placeholder="+7 7XX XXX XX XX"></label>
+        <label>Жеткізу мекенжайы<textarea id="address" required placeholder="Қала, көше, үй, пәтер"></textarea></label>
+        <label>Төлем тәсілі<select id="payment"><option>Жеткізгенде қолма-қол</option><option>Картамен (демо)</option><option>Kaspi Pay (демо)</option></select></label>
+        <button type="submit">Тапсырыс беру →</button>
+        <p style="font-size:12px;color:#777;margin:0">Ескерту: бұл оқу демо-нұсқасы. Нақты төлем алынбайды.</p>
+      </form>
+    </div>
+  </div>
+</div></section>
+<section class="wrap" id="track">
+  <div class="section-head"><div><h2>Тапсырысты бақылау</h2><p class="sub">Тапсырыс күйін тексер немесе демо ретінде жаңарт</p></div></div>
+  <div class="order-layout" style="margin-top:20px">
+    <div class="panel"><h3>📦 Ағымдағы мәртебе</h3><p id="orderMessage" class="sub">Тапсырыс берілгеннен кейін мәртебесі осында көрсетіледі.</p>
+      <div class="status-list" id="statusList">
+        <div class="status-step"><span class="dot"></span>Қабылданды</div><div class="status-step"><span class="dot"></span>Дайындалуда</div><div class="status-step"><span class="dot"></span>Курьер жолда</div><div class="status-step"><span class="dot"></span>Жеткізілді</div>
+      </div>
+    </div>
+    <div class="panel admin"><h3>🧑‍💼 Әкімші панелі (демо)</h3><p class="sub">Тапсырыстың мәртебесін өзгертуге арналған.</p>
+      <div class="admin-row"><div><strong id="adminOrder">Тапсырыс жоқ</strong><div class="sub" id="adminDetails" style="font-size:12px;margin-top:5px">Алдымен тапсырыс бер.</div></div><select id="adminStatus" onchange="changeStatus(this.value)" style="max-width:190px"><option value="0">Қабылданды</option><option value="1">Дайындалуда</option><option value="2">Курьер жолда</option><option value="3">Жеткізілді</option></select></div>
+      <p style="font-size:12px;color:#777">Нақты әкімші аккаунты мен дерекқор бұл демоға қосылмаған.</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="footer-inner"><div><strong style="color:white;font-size:18px">дәмді.</strong><br>Онлайн тағам тапсырыс беру жүйесі</div><div>Зертханалық жұмысқа арналған демо-сайт<br>© 2026 дәмді. Барлық құқықтар қорғалған.</div></div></footer>
+<div class="toast" id="toast"></div>
+<script>
+const foods=[
+{id:1,name:'Классикалық бургер',cat:'Фастфуд',price:1800,emoji:'🍔',desc:'Шырынды котлет, жаңа көкөністер және фирмалық тұздық.',tag:'Танымал'},
+{id:2,name:'Пепперони пицца',cat:'Фастфуд',price:2800,emoji:'🍕',desc:'Ірімшік, пепперони және хош иісті қызанақ тұздығы.',tag:'Хит'},
+{id:3,name:'Картоп фри',cat:'Фастфуд',price:850,emoji:'🍟',desc:'Сырты қытырлақ, іші жұмсақ картоп.',tag:'Гарнир'},
+{id:4,name:'Тауық донері',cat:'Фастфуд',price:1600,emoji:'🌯',desc:'Тауық еті, көкөніс және жеңіл тұздық.',tag:'Жаңа'},
+{id:5,name:'Палау',cat:'Негізгі тағам',price:2200,emoji:'🍛',desc:'Күріш, сәбіз және дәмдеуіштер қосылған ыстық тағам.',tag:'Үй тағамы'},
+{id:6,name:'Тауық қосылған паста',cat:'Негізгі тағам',price:2400,emoji:'🍝',desc:'Кремді тұздықтағы паста және жұмсақ тауық еті.',tag:'Ұсынамыз'},
+{id:7,name:'Кола',cat:'Сусындар',price:600,emoji:'🥤',desc:'Салқын газдалған сусын, 0.5 л.',tag:'Сусын'},
+{id:8,name:'Апельсин шырыны',cat:'Сусындар',price:750,emoji:'🧃',desc:'Жеміс дәмі бар сергітетін сусын.',tag:'Сусын'},
+{id:9,name:'Чизкейк',cat:'Десерттер',price:1200,emoji:'🍰',desc:'Жұмсақ ірімшік кремі бар нәзік десерт.',tag:'Десерт'},
+{id:10,name:'Балмұздақ',cat:'Десерттер',price:650,emoji:'🍨',desc:'Классикалық ваниль дәмі.',tag:'Салқын'},
+{id:11,name:'Суши сет',cat:'Негізгі тағам',price:3900,emoji:'🍣',desc:'Күріш пен балықтан жасалған таңдаулы сет.',tag:'Арнайы'},
+{id:12,name:'Капучино',cat:'Сусындар',price:900,emoji:'☕',desc:'Эспрессо мен сүт көбігінен дайындалған кофе.',tag:'Кофе'}
+];
+let cart={},category='Барлығы',orderNo=null,statusIndex=-1;
+const money=n=>n.toLocaleString('ru-RU')+' ₸';
+function renderMenu(){
+ const q=document.getElementById('search').value.toLowerCase().trim();
+ const list=foods.filter(f=>(category==='Барлығы'||f.cat===category)&&(f.name.toLowerCase().includes(q)||f.desc.toLowerCase().includes(q)));
+ document.getElementById('foodGrid').innerHTML=list.map(f=>`<article class="food"><div class="food-img">${f.emoji}</div><div class="food-body"><span class="tag">${f.tag}</span><h3>${f.name}</h3><p>${f.desc}</p><div class="food-bottom"><span class="price">${money(f.price)}</span><button onclick="addToCart(${f.id})">+ Себетке</button></div></div></article>`).join('')||'<p>Іздеу бойынша тағам табылмады.</p>';
+}
+function setCategory(cat,btn){category=cat;document.querySelectorAll('.categories button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderMenu()}
+function addToCart(id){cart[id]=(cart[id]||0)+1;renderCart();toast('Тағам себетке қосылды!')}
+function changeQty(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];renderCart()}
+function renderCart(){
+ const ids=Object.keys(cart);let total=0,count=0;
+ document.getElementById('cartItems').innerHTML=ids.length?ids.map(id=>{const f=foods.find(x=>x.id==id),q=cart[id];total+=f.price*q;count+=q;return `<div class="cart-line"><div><strong>${f.emoji} ${f.name}</strong><small>${money(f.price)} / дана</small><div class="qty"><button onclick="changeQty(${id},-1)">−</button><span>${q}</span><button onclick="changeQty(${id},1)">+</button><button class="remove" onclick="changeQty(${id},-${q})">Өшіру</button></div></div><div class="line-right">${money(f.price*q)}</div></div>`}).join(''):'<div class="empty">Себет әзірге бос.<br>Мәзірден тағам таңда.</div>';
+ document.getElementById('total').textContent=money(total);document.getElementById('cartCount').textContent=count;
+}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2400)}
+document.getElementById('checkoutForm').addEventListener('submit',e=>{
+ e.preventDefault();if(!Object.keys(cart).length){toast('Алдымен себетке тағам қос!');document.getElementById('menu').scrollIntoView({behavior:'smooth'});return}
+ orderNo='DM-'+Math.floor(10000+Math.random()*90000);statusIndex=0;
+ document.getElementById('orderMessage').textContent='Тапсырыс №'+orderNo+' қабылданды. Мәртебені төмендегі әкімші панелінен өзгертуге болады.';
+ document.getElementById('adminOrder').textContent='Тапсырыс №'+orderNo;
+ document.getElementById('adminDetails').textContent=document.getElementById('customerName').value+' · '+money(Object.keys(cart).reduce((s,id)=>s+foods.find(f=>f.id==id).price*cart[id],0));
+ document.getElementById('adminStatus').value='0';updateStatus();cart={};renderCart();e.target.reset();toast('Тапсырыс демо режимінде қабылданды!');document.getElementById('track').scrollIntoView({behavior:'smooth'});
+});
+function changeStatus(value){if(!orderNo){toast('Алдымен тапсырыс беру керек.');return}statusIndex=Number(value);updateStatus();toast('Тапсырыс мәртебесі жаңартылды')}
+function updateStatus(){
+ const names=['Қабылданды','Дайындалуда','Курьер жолда','Жеткізілді'];
+ document.getElementById('statusList').innerHTML=names.map((n,i)=>`<div class="status-step ${i<=statusIndex?'current':''}"><span class="dot"></span>${n}${i===statusIndex?' ✓':''}</div>`).join('');
+ document.getElementById('orderMessage').textContent=orderNo?'Тапсырыс №'+orderNo+' — '+names[statusIndex]+'.':'Тапсырыс берілгеннен кейін мәртебесі осында көрсетіледі.';
+}
+renderMenu();renderCart();
+</script>
+</body>
+</html>
