@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>дәмді — Онлайн тағам тапсырысы</title>
+<title>Delyvery rus — Онлайн тағам тапсырысы</title>
 <style>
 :root{--orange:#f46b35;--ink:#202124;--muted:#6b7280;--cream:#fff8f2;--line:#eee5de;--green:#21865b}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:var(--ink)}
@@ -53,7 +53,7 @@ footer{background:#202124;color:white;padding:28px 22px}.footer-inner{max-width:
 </head>
 <body>
 <header><div class="nav">
-  <div class="logo">дәмді<span>.</span></div>
+  <div class="logo">delyvery rus<span>.</span></div>
   <nav><a href="#menu">Мәзір</a><a href="#how">Қалай жұмыс істейді?</a><a href="#track">Тапсырыс мәртебесі</a></nav>
   <button class="cart-btn" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">Себет <span id="cartCount">0</span></button>
 </div></header>
@@ -85,7 +85,7 @@ footer{background:#202124;color:white;padding:28px 22px}.footer-inner{max-width:
   <div class="section-head"><div><h2>Тапсырысты рәсімдеу</h2><p class="sub">Мәліметтерді толтырып, тапсырысты жібер</p></div></div>
   <div class="order-layout" style="margin-top:22px">
     <div class="panel"><h3>🛒 Сенің себетің</h3><div id="cartItems"><div class="empty">Себет әзірге бос.<br>Мәзірден тағам таңда.</div></div><div class="total"><span>Жалпы сома</span><span id="total">0 ₸</span></div></div>
-    <div class="panel"><h3>📍 Жеткізу деректері</h3>
+    <div class="panel"><h3> Жеткізу деректері</h3>
       <form id="checkoutForm">
         <label>Аты-жөнің<input id="customerName" required placeholder="Мысалы, Айдос Нұрланұлы"></label>
         <label>Телефон нөмірі<input id="phone" type="tel" required placeholder="+7 7XX XXX XX XX"></label>
@@ -100,12 +100,12 @@ footer{background:#202124;color:white;padding:28px 22px}.footer-inner{max-width:
 <section class="wrap" id="track">
   <div class="section-head"><div><h2>Тапсырысты бақылау</h2><p class="sub">Тапсырыс күйін тексер немесе демо ретінде жаңарт</p></div></div>
   <div class="order-layout" style="margin-top:20px">
-    <div class="panel"><h3>📦 Ағымдағы мәртебе</h3><p id="orderMessage" class="sub">Тапсырыс берілгеннен кейін мәртебесі осында көрсетіледі.</p>
+    <div class="panel"><h3> Ағымдағы мәртебе</h3><p id="orderMessage" class="sub">Тапсырыс берілгеннен кейін мәртебесі осында көрсетіледі.</p>
       <div class="status-list" id="statusList">
         <div class="status-step"><span class="dot"></span>Қабылданды</div><div class="status-step"><span class="dot"></span>Дайындалуда</div><div class="status-step"><span class="dot"></span>Курьер жолда</div><div class="status-step"><span class="dot"></span>Жеткізілді</div>
       </div>
     </div>
-    <div class="panel admin"><h3>🧑‍💼 Әкімші панелі (демо)</h3><p class="sub">Тапсырыстың мәртебесін өзгертуге арналған.</p>
+    <div class="panel admin"><h3> Әкімші панелі (демо)</h3><p class="sub">Тапсырыстың мәртебесін өзгертуге арналған.</p>
       <div class="admin-row"><div><strong id="adminOrder">Тапсырыс жоқ</strong><div class="sub" id="adminDetails" style="font-size:12px;margin-top:5px">Алдымен тапсырыс бер.</div></div><select id="adminStatus" onchange="changeStatus(this.value)" style="max-width:190px"><option value="0">Қабылданды</option><option value="1">Дайындалуда</option><option value="2">Курьер жолда</option><option value="3">Жеткізілді</option></select></div>
       <p style="font-size:12px;color:#777">Нақты әкімші аккаунты мен дерекқор бұл демоға қосылмаған.</p>
     </div>
@@ -116,18 +116,18 @@ footer{background:#202124;color:white;padding:28px 22px}.footer-inner{max-width:
 <div class="toast" id="toast"></div>
 <script>
 const foods=[
-{id:1,name:'Классикалық бургер',cat:'Фастфуд',price:1800,emoji:'🍔',desc:'Шырынды котлет, жаңа көкөністер және фирмалық тұздық.',tag:'Танымал'},
-{id:2,name:'Пепперони пицца',cat:'Фастфуд',price:2800,emoji:'🍕',desc:'Ірімшік, пепперони және хош иісті қызанақ тұздығы.',tag:'Хит'},
-{id:3,name:'Картоп фри',cat:'Фастфуд',price:850,emoji:'🍟',desc:'Сырты қытырлақ, іші жұмсақ картоп.',tag:'Гарнир'},
-{id:4,name:'Тауық донері',cat:'Фастфуд',price:1600,emoji:'🌯',desc:'Тауық еті, көкөніс және жеңіл тұздық.',tag:'Жаңа'},
-{id:5,name:'Палау',cat:'Негізгі тағам',price:2200,emoji:'🍛',desc:'Күріш, сәбіз және дәмдеуіштер қосылған ыстық тағам.',tag:'Үй тағамы'},
-{id:6,name:'Тауық қосылған паста',cat:'Негізгі тағам',price:2400,emoji:'🍝',desc:'Кремді тұздықтағы паста және жұмсақ тауық еті.',tag:'Ұсынамыз'},
-{id:7,name:'Кола',cat:'Сусындар',price:600,emoji:'🥤',desc:'Салқын газдалған сусын, 0.5 л.',tag:'Сусын'},
-{id:8,name:'Апельсин шырыны',cat:'Сусындар',price:750,emoji:'🧃',desc:'Жеміс дәмі бар сергітетін сусын.',tag:'Сусын'},
-{id:9,name:'Чизкейк',cat:'Десерттер',price:1200,emoji:'🍰',desc:'Жұмсақ ірімшік кремі бар нәзік десерт.',tag:'Десерт'},
-{id:10,name:'Балмұздақ',cat:'Десерттер',price:650,emoji:'🍨',desc:'Классикалық ваниль дәмі.',tag:'Салқын'},
-{id:11,name:'Суши сет',cat:'Негізгі тағам',price:3900,emoji:'🍣',desc:'Күріш пен балықтан жасалған таңдаулы сет.',tag:'Арнайы'},
-{id:12,name:'Капучино',cat:'Сусындар',price:900,emoji:'☕',desc:'Эспрессо мен сүт көбігінен дайындалған кофе.',tag:'Кофе'}
+{id:1,name:'Классикалық бургер',cat:'Фастфуд',price:1800,emoji:'фото',desc:'Шырынды котлет, жаңа көкөністер және фирмалық тұздық.',tag:'Танымал'},
+{id:2,name:'Пепперони пицца',cat:'Фастфуд',price:2800,emoji:'фото',desc:'Ірімшік, пепперони және хош иісті қызанақ тұздығы.',tag:'Хит'},
+{id:3,name:'Картоп фри',cat:'Фастфуд',price:850,emoji:'фото',desc:'Сырты қытырлақ, іші жұмсақ картоп.',tag:'Гарнир'},
+{id:4,name:'Тауық донері',cat:'Фастфуд',price:1600,emoji:'фото',desc:'Тауық еті, көкөніс және жеңіл тұздық.',tag:'Жаңа'},
+{id:5,name:'Палау',cat:'Негізгі тағам',price:2200,emoji:'фото',desc:'Күріш, сәбіз және дәмдеуіштер қосылған ыстық тағам.',tag:'Үй тағамы'},
+{id:6,name:'Тауық қосылған паста',cat:'Негізгі тағам',price:2400,emoji:'фото',desc:'Кремді тұздықтағы паста және жұмсақ тауық еті.',tag:'Ұсынамыз'},
+{id:7,name:'Кола',cat:'Сусындар',price:600,emoji:'фото',desc:'Салқын газдалған сусын, 0.5 л.',tag:'Сусын'},
+{id:8,name:'Апельсин шырыны',cat:'Сусындар',price:750,emoji:'фото',desc:'Жеміс дәмі бар сергітетін сусын.',tag:'Сусын'},
+{id:9,name:'Чизкейк',cat:'Десерттер',price:1200,emoji:'фото',desc:'Жұмсақ ірімшік кремі бар нәзік десерт.',tag:'Десерт'},
+{id:10,name:'Балмұздақ',cat:'Десерттер',price:650,emoji:'фото',desc:'Классикалық ваниль дәмі.',tag:'Салқын'},
+{id:11,name:'Суши сет',cat:'Негізгі тағам',price:3900,emoji:'фото',desc:'Күріш пен балықтан жасалған таңдаулы сет.',tag:'Арнайы'},
+{id:12,name:'Капучино',cat:'Сусындар',price:900,emoji:'фото',desc:'Эспрессо мен сүт көбігінен дайындалған кофе.',tag:'Кофе'}
 ];
 let cart={},category='Барлығы',orderNo=null,statusIndex=-1;
 const money=n=>n.toLocaleString('ru-RU')+' ₸';
